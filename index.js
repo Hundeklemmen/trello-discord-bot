@@ -2,9 +2,12 @@ var Trello = require("trello");
 const fs = require('fs-extra')
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
 var trello = new Trello("Api key", "Api Secret");
+client.login('Discord Bot Token');
 
 var discord_Channel = "532303694805336084" // ID
+var trello_board = "NK2OQvxI" //ID
 
 setInterval(() => {
     doCheck();
@@ -15,7 +18,7 @@ function doCheck(){
     fs.readJson(__dirname+"/list.json", (err, listObject) => {
         if (err) console.error(err)
 
-        trello.makeRequest('get', '/1/boards/NK2OQvxI/actions', { webhooks: true }).then((data) => {
+        trello.makeRequest('get', '/1/boards/'+trello_board+'/actions', { webhooks: true }).then((data) => {
             data = data.reverse();
             for (var card of data){
                 //handleCard(card);
@@ -66,5 +69,3 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   doCheck();
 });
-
-client.login('Discord Bot Token');
