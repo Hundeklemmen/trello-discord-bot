@@ -36,20 +36,13 @@ function doCheck(){
                                 client.channels.get(discord_Channel).send("'"+board.member.name+"' Blev fjernet fra '"+board.card.name+"'")
                             } else if(card.type == "createCard"){
                                 client.channels.get(discord_Channel).send("'"+board.card.name+"' blev oprettet i '"+board.list.name+"'")
-                            } else {
-                                console.log("-------------------------")
-                                console.log(card.type)
-                                console.log("-------------------------")
                             }
                         }
                     })
                 }
             }
-            console.log(listObject)
             fs.writeJson(__dirname+"/list.json", listObject, err => {
                 if (err) return console.error(err)
-            
-                console.log('success!')
             })
         // console.log
         });
